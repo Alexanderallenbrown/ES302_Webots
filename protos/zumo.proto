@@ -171,7 +171,7 @@ PROTO zumo[
         rotationStep 0.01
         device [
           PositionSensor {
-            name "left_position"
+            name "position_left"
           }
           DEF zumo_motor LinearMotor {
             name "motor_left"
@@ -226,7 +226,7 @@ PROTO zumo[
       ]
     }
     physics Physics {
-      mass 0.3
+      mass 0.26
     }
     controller IS controller
     battery [

@@ -30,7 +30,7 @@ while robot.step(timestep) != -1:
     # Enter here functions to read sensor data, like:
     #  val = ds.getValue()
     leftMotor.setVelocity(0.05)
-    rightMotor.setVelocity(.05)
+    rightMotor.setVelocity(-.05)
     # Process sensor data here.
 
     # Enter here functions to send actuator commands, like:
