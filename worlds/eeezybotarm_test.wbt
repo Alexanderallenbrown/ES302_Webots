@@ -2,14 +2,15 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.18733253636781963 0.01078135064931628 0.9822373864276273 2.516654312664109
-  position 0.28036901788788116 -0.24997404865159822 0.18835713442443736
+  orientation -0.2473766403244649 0.014860435223008757 0.9688054321104743 3.0253274387414666
+  position 0.38125162181562366 -0.039772170609883015 0.26846879301941917
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+  rotation 0 1 0 0
 }
 Robot {
   translation 0 0 0.017
@@ -107,7 +108,7 @@ Robot {
                 ]
                 endPoint DEF motor_2_arm Solid {
                   translation -0.001 0 0.0325
-                  rotation -9.833207775682948e-11 -0.479425538604203 -0.8775825618903728 3.141592653229803
+                  rotation -9.833207851228609e-11 -0.479425538604203 -0.8775825618903728 3.141592653229803
                   children [
                     HingeJoint {
                       jointParameters HingeJointParameters {
@@ -136,7 +137,7 @@ Robot {
                             }
                             endPoint Solid {
                               translation -0.007 -0.035 0
-                              rotation 0.7078666013883795 -0.017937966095469746 -0.7061183356996351 3.1020423905104675
+                              rotation 0.7078666013883795 -0.017937966095469746 -0.7061183356996352 3.1020423905104675
                               children [
                                 Shape {
                                   appearance USE plastic_appearance
