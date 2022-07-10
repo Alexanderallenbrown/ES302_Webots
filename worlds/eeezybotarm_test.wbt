@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.2473766403244649 0.014860435223008757 0.9688054321104743 3.0253274387414666
-  position 0.38125162181562366 -0.039772170609883015 0.26846879301941917
+  orientation -0.09709716688099654 -0.7601494562052605 0.6424522896017499 5.890658102970324
+  position -0.313149879991702 0.05778742714461254 0.20679536276395202
 }
 TexturedBackground {
 }
@@ -108,9 +108,9 @@ Robot {
                 ]
                 endPoint DEF motor_2_arm Solid {
                   translation -0.001 0 0.0325
-                  rotation -9.833207851228609e-11 -0.479425538604203 -0.8775825618903728 3.141592653229803
+                  rotation -9.833207865830918e-11 -0.479425538604203 -0.8775825618903728 3.141592653229803
                   children [
-                    HingeJoint {
+                    DEF horizontal_pivot HingeJoint {
                       jointParameters HingeJointParameters {
                         position 1.55
                         axis -1 0 0
@@ -130,12 +130,12 @@ Robot {
                               ]
                             }
                           }
-                          HingeJoint {
+                          DEF horizontal_link HingeJoint {
                             jointParameters HingeJointParameters {
                               position 1.52
                               anchor 0 -0.035 0
                             }
-                            endPoint Solid {
+                            endPoint DEF link_solid Solid {
                               translation -0.007 -0.035 0
                               rotation 0.7078666013883795 -0.017937966095469746 -0.7061183356996352 3.1020423905104675
                               children [
@@ -192,6 +192,85 @@ Robot {
                         ]
                       }
                     }
+                    DEF trangular_pivot HingeJoint {
+                      jointParameters HingeJointParameters {
+                        position -0.98
+                        anchor 0 0.08 -0.0025
+                      }
+                      endPoint DEF triangular_link_solid Solid {
+                        translation 0.011999999999999993 0.08 -0.0025
+                        rotation -0.9999999999999999 0 0 0.8632917441525779
+                        children [
+                          DEF triangle_rear_link HingeJoint {
+                            jointParameters HingeJointParameters {
+                              position 0.885
+                              anchor 0 -0.036 0.0175
+                            }
+                            endPoint Solid {
+                              translation 0 -0.036 0.0175
+                              rotation 1 0 0 0.8850000000000002
+                              children [
+                                DEF link_xfor Transform {
+                                  translation 0.005 0 0
+                                  rotation -0.5773502691896258 0.5773502691896258 -0.5773502691896258 2.09
+                                  children [
+                                    DEF link_shape Shape {
+                                      appearance USE plastic_appearance
+                                      geometry Mesh {
+                                        url [
+                                          "meshes/eeezybotarm/EBA_01.00.003_link.STL"
+                                        ]
+                                      }
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        axis 0 0 1
+                                        anchor 0.08 0 0
+                                      }
+                                      endPoint SolidReference {
+                                        solidName "turret"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                              name "rear_triangle_link"
+                              boundingObject Transform {
+                                translation 0.005 -0.04 0
+                                children [
+                                  Box {
+                                    size 0.01 0.04 0.01
+                                  }
+                                ]
+                              }
+                              physics Physics {
+                              }
+                            }
+                          }
+                          Shape {
+                            appearance USE plastic_appearance
+                            geometry Mesh {
+                              url [
+                                "meshes/eeezybotarm/EBA_01.00.006_triangular_link.STL"
+                              ]
+                            }
+                          }
+                        ]
+                        boundingObject Transform {
+                          translation 0 -0.015 0.015
+                          rotation 1 0 0 1.5708
+                          children [
+                            Capsule {
+                              height 0.03
+                              radius 0.002
+                              subdivision 16
+                            }
+                          ]
+                        }
+                        physics Physics {
+                        }
+                      }
+                    }
                   ]
                   name "vertical_arm"
                   boundingObject Transform {
@@ -244,6 +323,7 @@ Robot {
                 }
               }
             ]
+            name "turret"
             boundingObject Box {
               size 0.09 0.03 0.001
             }
