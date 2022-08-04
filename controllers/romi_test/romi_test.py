@@ -35,9 +35,14 @@ while robot.step(timestep) != -1:
     #  val = ds.getValue()
     leftMotor.setVelocity(0)
     rightMotor.setVelocity(0)
-    s1.setPosition(0.1*sin(simtime)+.5)
-    s3.setPosition(-0.2*sin(simtime)+1.2)
-    s2.setPosition(0.005*sin(simtime)+.005)
+    # s1.setPosition(0.1*sin(simtime)+.5)
+    # s3.setPosition(-0.2*sin(simtime)+1.2)
+    # s2.setPosition(0.005*sin(simtime)+.005)
+
+    s1.setPosition(.5)
+    s3.setPosition(1.2)
+    s2.setPosition(0)
+
     # Process sensor data here.
 
     # Enter here functions to send actuator commands, like:
