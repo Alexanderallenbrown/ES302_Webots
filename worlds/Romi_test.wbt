@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.3555442851465332 -0.1511718686101727 -0.9223531468155511 4.161155938017206
-  position 0.3294873150527109 -0.14941019212475634 0.3291292771177237
+  orientation 0.11553781039375612 0.10441332061977548 -0.9878000166261227 2.33061280736076
+  position 0.49258647384947185 0.491249105810794 0.23409564590782456
 }
 TexturedBackground {
 }
@@ -127,7 +127,7 @@ Robot {
                   anchor 0.1515 0 -0.027
                 }
                 endPoint DEF gripper_base Solid {
-                  translation 0.15061931441681228 -0.004500000000000021 -0.024660257940805175
+                  translation 0.15061931441681228 -0.004500000000000025 -0.024660257940805175
                   rotation 0 -1 0 0.3599999999999996
                   children [
                     Shape {
@@ -175,7 +175,7 @@ Robot {
                         axis 0 -1 0
                       }
                       device [
-                        DEF motor_s2 LinearMotor {
+                        DEF motor_s2_1 LinearMotor {
                           name "s2"
                         }
                       ]
@@ -185,7 +185,14 @@ Robot {
                         children [
                           USE gripper_jaw_shape
                         ]
-                        boundingObject USE gripper_jaw_shape
+                        boundingObject Transform {
+                          translation 0.04 -0.0025 -0.015
+                          children [
+                            Box {
+                              size 0.025 0.005 0.03
+                            }
+                          ]
+                        }
                         physics Physics {
                         }
                       }
@@ -380,8 +387,8 @@ Robot {
                   anchor 0 0 0.027
                 }
                 endPoint DEF bentlink Solid {
-                  translation 0.008999999999999944 0 0.027
-                  rotation 2.5571217256165447e-11 -0.9921976672293292 -0.1246747333852277 3.1415926531827867
+                  translation 0.008999999999999937 0 0.027
+                  rotation 2.5571215041683498e-11 -0.9921976672293292 -0.1246747333852277 3.1415926531827867
                   children [
                     Shape {
                       appearance USE plastic
