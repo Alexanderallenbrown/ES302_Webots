@@ -16,6 +16,8 @@ f = open("simdata.txt","w")
 #automatically loads proper WeBots libraries.
 #the webots robot class lives inside of romi.simromi
 romi = Romi(sim=True)
+#create a second object to talk to REAL romi!
+romi2 = Romi(port='COM5')
 
 # get the time step of the current world.
 timestep = int(romi.simromi.getBasicTimeStep())
@@ -26,8 +28,6 @@ simtime = 0
 # - perform simulation steps until Webots is stopping the controller
 while romi.simromi.step(timestep) != -1:
     simtime+=(timestep/1000.0)
-    if simtime>6.0:
-        break
 
     #send a sine wave motor command to the wheels
     motorspeed_amp = 75
@@ -40,10 +40,14 @@ while romi.simromi.step(timestep) != -1:
     #update the simulated Romi with our commands:
     #commands: motor_left,motor_right,servo_1,servo_2,servo_3
     romi.update(wheelcmd,wheelcmd,s1cmd,s2cmd,s3cmd)
+    romi2.update(wheelcmd,wheelcmd,s1cmd,s2cmd,s3cmd)
     #now collect data from the romi's sensors and save to a file!
 
     #make first few columns echo the commands:
     #write time and commands to file so we know what we asked the robot to do:
     string1 = format(simtime,'0.3f')+","+format(wheelcmd,'d')+","+format(wheelcmd,'d')+","+format(s1cmd,'d')+','+format(s2cmd,'d')+','+format(s3cmd,'d')+','
     #now write the feedback from the actual robot's sensors:
-    f.write(romi.datastring)
+    #simulated:
+    f.write(romi.datastring.strip()+",")
+    #real:
+    f.write(romi2.datastring)
