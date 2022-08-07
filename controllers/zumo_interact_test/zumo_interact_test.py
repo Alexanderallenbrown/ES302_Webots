@@ -22,11 +22,11 @@ def zumoInteract(robot,leftCounts,rightCounts):
     rP = robot.getDevice('position_right').getValue()
     lV = lM.getVelocity()
     rV = rM.getVelocity()
-    
+
     #now calculate omega of motors
     lO = lV/.016 #approximate
     rO = rV/.016
-    
+
     kt = .05 #Nm/A
     R = 4 #Ohms
     Vbatt = 6 #volts
@@ -34,21 +34,21 @@ def zumoInteract(robot,leftCounts,rightCounts):
     #TODO constrain input counts
     Vleft_command = leftCounts/400*Vbatt
     Vright_command = rightCounts/400*Vbatt
-    
+
     #this should be updated to include Jm,bm
     force_left = kt/(R*r)*(Vleft_command-kt*lO)
-    force_right = kt/(R*r)*(Vright_command-kt*lO)
-    
+    force_right = kt/(R*r)*(Vright_command-kt*rO)
+
     #set motor force
     lM.setForce(force_left)
     rM.setForce(force_right)
-    
+
     #update so that these are in encoder counts
     left_feedback = lP
     right_feedabck = rP
-    
-    
-    
+
+
+
     return lP,rP
 
 # get the time step of the current world.
@@ -65,6 +65,6 @@ timestep = int(robot.getBasicTimeStep())
 while robot.step(timestep) != -1:
     lP,rP = zumoInteract(robot,-400,400)
     print(lP,rP)
-    
+
 
 # Enter here exit cleanup code.
