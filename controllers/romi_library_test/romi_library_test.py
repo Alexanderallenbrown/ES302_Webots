@@ -42,7 +42,7 @@ while romi.simromi.step(timestep) != -1:
             s3cmd = int(20*sin(simtime)+90)
     elif(simtype=='step'):
         s1cmd = s2cmd = s3cmd = 100
-        if((simtime<0.5) and simtime>(2.0/timestep)):
+        if((simtime<1.0) and simtime>(2.0/timestep)):
             wheelcmd = 400
         else:
             wheelcmd=0

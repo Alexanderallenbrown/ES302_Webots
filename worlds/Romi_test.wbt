@@ -3,7 +3,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.24368282339577765 0.28501486986153546 -0.9270303153293717 1.8111013743309163
-  position 0.24634050756217904 0.947823931749771 0.5957930219790493
+  position 0.3594359050591035 1.5077899579831864 0.9784210696012348
 }
 TexturedBackground {
 }
@@ -41,7 +41,7 @@ WoodenBox {
 RectangleArena {
 }
 Robot {
-  translation -0.041251 0.151918 0.03
+  translation -0.381251 0.151918 0.03
   rotation 0 1 0 0
   children [
     DistanceSensor {
@@ -131,7 +131,7 @@ Robot {
                   anchor 0.1515 0 -0.027
                 }
                 endPoint DEF gripper_base Solid {
-                  translation 0.15061931441681228 -0.00450000000000011 -0.024660257940805175
+                  translation 0.15061931441681228 -0.004500000000000134 -0.024660257940805175
                   rotation 0 -1 0 0.3599999999999996
                   children [
                     Shape {
@@ -400,8 +400,8 @@ Robot {
                   anchor 0 0 0.027
                 }
                 endPoint DEF bentlink Solid {
-                  translation 0.008999999999999767 0 0.027
-                  rotation 2.5571177756203866e-11 -0.9921976672293292 -0.1246747333852277 3.1415926531827867
+                  translation 0.008999999999999718 0 0.027
+                  rotation 2.5571171396784054e-11 -0.9921976672293292 -0.1246747333852277 3.1415926531827867
                   children [
                     Shape {
                       appearance USE plastic
@@ -465,7 +465,7 @@ Robot {
       jointParameters DEF wheeljoint HingeJointParameters {
         axis 0 1 0
         anchor 0 0.083 0.0077
-        dampingConstant 0.01
+        dampingConstant 0.012
       }
       device [
         DEF wheel_encoder PositionSensor {
@@ -518,7 +518,7 @@ Robot {
       jointParameters HingeJointParameters {
         axis 0 -1 0
         anchor 0 -0.083 0.0077
-        dampingConstant 0.01
+        dampingConstant 0.012
       }
       device [
         RotationalMotor {
