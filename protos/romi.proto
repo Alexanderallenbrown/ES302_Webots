@@ -16,28 +16,11 @@ Robot {
       translation 0 0 0
       children IS additionalSensors
     }
-    DistanceSensor {
-      translation 0.08 0 0
-      name "proxFront"
-      lookupTable [
-      0.0127	55	0,
-      0.0254	48	0,
-      0.0381	20	0,
-      0.0508	11	0,
-      0.0635	8	0,
-      0.0762	5	0,
-      0.1016	3	0,
-      0.127	2	0,
-      0.1778	1	0,
-      0.2000  0 0
-      ]
-      type "infra-red"
-    }
     DEF rom_chassis_shape Shape {
       appearance PBRAppearance {
         baseColor 0.3 0.3 0.3
         roughness 1
-        metalness 0
+        metalness 0.5
       }
       geometry Mesh {
         url [
@@ -119,6 +102,24 @@ Robot {
                   translation 0.15061931441681228 -0.004500000000000134 -0.024660257940805175
                   rotation 0 -1 0 0.3599999999999996
                   children [
+                  DistanceSensor {
+                    translation 0 .01 -0.03
+                    name "proxFront"
+                    lookupTable [0.0127	55	0,
+                    0.0254	48	0,
+                    0.0381	20	0,
+                    0.0508	11	0,
+                    0.0635	8	0,
+                    0.0762	5	0,
+                    0.1016	3	0,
+                    0.127	2	0,
+                    0.1778	1	0,
+                    0.2000  0 0
+                    ]
+                    type "generic"
+                    numberOfRays 4
+                    aperture 0.02
+                  }
                     Shape {
                       appearance USE plastic
                       geometry Mesh {
@@ -474,7 +475,7 @@ Robot {
             appearance PBRAppearance {
               baseColor 0.6 0.6 0.6
               roughness 1
-              metalness 0
+              metalness 0.5
             }
             geometry DEF wheel_mesh Mesh {
               url [

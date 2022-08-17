@@ -40,12 +40,12 @@ while romi.simromi.step(timestep) != -1:
     FSM.update((proxReading>2),T0.state,T1.state)
     #now block 4: do what needs to be done in each state
     if(FSM.FWD):
-        romi.update(100,100,90,0,30)
+        romi.update(100,100,95,0,110)
     elif(FSM.TURN):
-        romi.update(100,-100,90,0,30)
+        romi.update(100,-100,95,0,110)
     elif(FSM.WAIT):
         #stop
-        romi.update(0,0,90,0,30)
+        romi.update(0,0,95,0,110)
     else:
         print("state machine broken")
         romi.update(0,0,90,90,90)

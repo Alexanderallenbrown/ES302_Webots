@@ -1,4 +1,4 @@
 *.txt
 *.cache
 *.wbproj
-controllers/solution*
+controllers/solution*/
