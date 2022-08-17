@@ -1,15 +1,21 @@
 PROTO romi[
+  field SFString name "Romi"
   field SFVec3f    translation  0 0 0.02
   field SFRotation rotation     0 1 0 0
   field SFString controller "void"
   field SFFloat motorDamping 0.012
   field SFFloat robotMass 0.5
+  field MFNode additionalSensors []
 ]
 {
 Robot {
   translation IS translation
   rotation IS rotation
   children [
+  Transform {
+      translation 0 0 0
+      children IS additionalSensors
+    }
     DistanceSensor {
       translation 0.08 0 0
       name "proxFront"
@@ -22,7 +28,8 @@ Robot {
       0.0762	5	0,
       0.1016	3	0,
       0.127	2	0,
-      0.1778	1	0
+      0.1778	1	0,
+      0.2000  0 0
       ]
       type "infra-red"
     }
@@ -566,5 +573,6 @@ Robot {
   battery [
     0
   ]
+  name IS name
 }
 }

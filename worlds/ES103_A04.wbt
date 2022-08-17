@@ -1,0 +1,48 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.3726809533645218 0.7288158831658456 0.5744008316885514 1.1591434028135676
+  position -1.3970717727508886 -0.6683669419560038 1.333207625599523
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  texture "dusk"
+  luminosity 0
+}
+RectangleArena {
+  rotation 0 1 0 0
+  floorSize 5 5
+}
+romi {
+  name "Romi_Leader"
+  translation -0.31 0 0.03
+  rotation 0 0 1 0
+  controller "romi_explore"
+  additionalSensors [
+    PointLight {
+      attenuation 0.05 0.05 1
+      intensity 0.01
+      location 0.02 0 0.03
+    }
+  ]
+}
+romi {
+  name "Romi_Follower"
+  translation -0.96 0 0.04
+  rotation 0 0 1 1.309
+  controller "A04_Starter"
+  additionalSensors [
+    LightSensor {
+      translation 0.05 -0.05 0.01
+      rotation 0 0 1 -0.5
+      name "lightSensorRight"
+    }
+    LightSensor {
+      translation 0.05 0.05 0.01
+      rotation 0 0 1 0.5
+      name "lightSensorLeft"
+    }
+  ]
+}
