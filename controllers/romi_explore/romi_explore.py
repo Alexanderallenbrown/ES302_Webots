@@ -37,7 +37,7 @@ while romi.simromi.step(timestep) != -1:
     T1.update(FSM.TURN,timestep)
 
     #Now update the FSM itself.
-    FSM.update((proxReading>2),T0.state,T1.state)
+    FSM.update((proxReading>700),T0.state,T1.state)
     #now block 4: do what needs to be done in each state
     if(FSM.FWD):
         romi.update(100,100,95,0,110)

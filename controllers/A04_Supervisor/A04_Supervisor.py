@@ -19,8 +19,8 @@ simtime = 0
 i = 0
 while robot.step(timestep) != -1:
   #get the positions of each robot
-  follower_pos = follower.getPose()
-  leader_pos = leader.getPose()
+  follower_pos = follower.getPosition()
+  leader_pos = leader.getPosition()
   #write them to file in the specified format
   f.write(str(simtime)+","+str(leader_pos[0])+","+str(leader_pos[1])+","+str(follower_pos[0])+","+str(follower_pos[1])+"\r\n")
   #update simtime
