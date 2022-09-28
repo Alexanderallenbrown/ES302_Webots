@@ -13,8 +13,8 @@ RectangleArena {
   rotation 0 1 0 0
 }
 DEF Romi romi {
-  translation 0 0 0.03
-  rotation 0 0 1 0
+  translation 0 0 0.0269254
+  rotation 1 0 0 0
   controller "Week05_Explore"
   additionalSensors [
     DEF gps GPS {
@@ -28,22 +28,6 @@ DEF Romi romi {
   ]
 }
 DEF supervisor Robot {
-  controller "Week05_Supervisor"
+  controller "OneRomi_Supervisor"
   supervisor TRUE
-}
-DEF measuredPoint Solid {
-  translation 0.13 -0.2 0
-  children [
-    Shape {
-      appearance Appearance {
-        material Material {
-          diffuseColor 0.8 0 0
-          transparency 0.5
-        }
-      }
-      geometry Sphere {
-        radius 0.0254
-      }
-    }
-  ]
 }
