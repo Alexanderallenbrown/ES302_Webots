@@ -110,7 +110,7 @@ class Artybot:
 
         wb_servo_1c = (self.servo_1Command-90)*3.1415/180
         wb_servo_2c = 3.1415/180*(self.servo_2Command-90)
-        wb_servo_3c = (self.servo_3Command-90)*3.1415/180
+        wb_servo_3c = -(self.servo_3Command-90)*3.1415/180
         #now send to simulation
 
         self.simS1.setPosition(wb_servo_1c)
@@ -124,7 +124,7 @@ class Artybot:
 
     def __updateHW__(self):
         """! updates a real robot (not for user use)"""
-        sendstr = "!"+format(self.servo_1Command,'d')+","+format(self.servo_2Command,'d')+","+format(self.servo_3Command,'d')+"\r\n"
+        sendstr = "!"+format(int(self.servo_1Command),'d')+","+format(int(self.servo_2Command),'d')+","+format(int(self.servo_3Command),'d')+"\r\n"
         # print("sending:")
         # print(sendstr.encode())
         self.ser.write(sendstr.encode())

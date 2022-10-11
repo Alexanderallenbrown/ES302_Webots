@@ -1,8 +1,8 @@
 #include <Servo.h>
 
-Servo3 m1;
-Servo3 m2;
-Servo3 m3;
+Servo m1;
+Servo m2;
+Servo m3;
 
 int16_t m1Command = 90;
 int16_t m2Command = 90;
@@ -47,5 +47,3 @@ void loop() {
   }
   
   
-
-}

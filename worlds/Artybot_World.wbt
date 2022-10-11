@@ -258,5 +258,5 @@ DEF ArtyBot Robot {
   }
   physics Physics {
   }
-  controller "artybot_demo"
+  controller "artybot_demo_HWSW"
 }
