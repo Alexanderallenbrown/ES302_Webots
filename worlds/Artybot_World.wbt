@@ -3,7 +3,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.26364053853972996 0.24328177920621927 -0.9334386119851361 2.026898842520397
-  position 0.1352943602610018 0.4080132525131242 0.29717006397049783
+  position 0.31741302283434997 0.5872852600626393 0.42659507829328075
 }
 TexturedBackground {
 }
@@ -12,7 +12,7 @@ TexturedBackgroundLight {
 RectangleArena {
 }
 DEF Paper Solid {
-  translation 0 0 0.0005
+  translation 0.11 0 0.001
   children [
     Shape {
       appearance Appearance {
@@ -34,7 +34,7 @@ DEF Paper Solid {
   }
 }
 DEF ArtyBot Robot {
-  translation -0.1397 0 0.0005
+  translation 0 0 0.0005
   children [
     DEF base_group Group {
       children [
@@ -122,7 +122,7 @@ DEF ArtyBot Robot {
             ]
             endPoint DEF medarm_solid Solid {
               translation -0.005 -0.00549996 0.053
-              rotation 0 0 -1 0.09999999999999855
+              rotation 0 0 -1 0.10000000000000299
               children [
                 DEF medarm_shape_transform Transform {
                   translation -0.0146 0 0.0005
@@ -197,6 +197,11 @@ DEF ArtyBot Robot {
                                 children [
                                   Pen {
                                     rotation 1 0 0 -1.57
+                                    children [
+                                      DEF gps_penposition GPS {
+                                        name "gps_penposition"
+                                      }
+                                    ]
                                     inkDensity 0.8
                                     leadSize 0.001
                                     maxDistance 0.002
