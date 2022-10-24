@@ -8,10 +8,19 @@ from Romi import Romi
 #import sine function to use
 from exploreFSM import exploreFSM,Timer
 import random
+import numpy as np
+
+from realtime_plotter import RealTimePlot
+
+plot1 = RealTimePlot()
 
 #create a file to write results to:
 f = open('Week05_Data.txt','w')
+m = open('Week05_Map.txt', 'w')
 
+s_d, s_c = np.loadtxt('sensor.txt',delimiter=',',unpack=True)
+s_c = np.flip(s_c)
+s_d = np.flip(s_d)
 # create the Robot instance.
 #instantiating a Romi library object in simulation mode
 #automatically loads proper WeBots libraries.
@@ -50,6 +59,7 @@ Yromi = 0
 #variables to hold egocentric romi estimates
 U = 0
 psidot = 0
+psi = 0
 
 simtime = 0
 
@@ -60,17 +70,33 @@ while romi.simromi.step(timestep) != -1:
     ### FSM block 1: inputs, timers, and counters
 
     #compute Romi encoder velocities in COUNTS PER SECOND
-    vLeft = (romi.encLeft - oldLeftEncoder)/(timestep/1000.0)
-    vRight = (romi.encRight - oldRightEncoder)/(timestep/1000.0)
+    vLeft = (romi.encLeft - oldLeftEncoder)/(timestep/1000.0) / (120 * 12) * (2 * 3.1415 * 0.035)
+    vRight = (romi.encRight - oldRightEncoder)/(timestep/1000.0) / (120 * 12) * (2 * 3.1415 * 0.035)
+    radius = 0.07438
 
     #use to get estimates of U, psidot using vLeft and vRight
-    U = 0 #  TODO: implement this!
-    psidot = 0 # TODO: implement this!
+    U = (vLeft + vRight) / 2 #  TODO: implement this!
+    psidot = (vRight - vLeft) / (2 * radius) # TODO: implement this!
 
     #use to get estimates of current romi X, and Y in allocentric frame
     #using odometry:
-    Xromi = 0 #TODO implement this!
-    Yromi = 0 #TODO implement this!
+    Xromi = Xromi + U * np.cos(psi) * timestep/1000.0 #TODO implement this!
+    Yromi = Yromi + U * np.sin(psi) * timestep/1000.0 #TODO implement this!
+
+    if romi.proxFrontVal > 250:
+        dist = np.interp(romi.proxFrontVal, s_c, s_d)
+        Xwall = Xromi + (dist + 0.14) * np.cos(psi)
+        Ywall = Yromi + (dist + 0.14) * np.sin(psi)
+        plot1.update(Xwall,Ywall)
+        m.write(str(Xwall) + "," + str(Ywall) + "," + str(simtime)+"\r\n")
+        print(format(Xwall, '0.2f') + ", " + format(Ywall, '0.2f'))
+
+    psi = psi + psidot * timestep/1000.0
+
+    oldLeftEncoder = romi.encLeft#value for old left encoder (for velocity computation)
+    oldRightEncoder = romi.encRight #old right encoder
+
+    # print(" U: " + format(U, '0.2f') + " X: " + format(Xromi, '0.2f') + " Y: " + format(Yromi, '0.2f') + " P: " + format(psi, '0.2f') + " dP: " + format(psidot, '0.2f'))
 
     #update the timers: FSM block 1
     #timer 0 should run when in wait
@@ -85,9 +111,9 @@ while romi.simromi.step(timestep) != -1:
     FSM.update((proxReading>700),T0.state,T1.state)
     #now block 4: do what needs to be done in each state
     if(FSM.FWD):
-        romi.update(100,100,120,0,110)
+        romi.update(100,100,95,0,110)
     elif(FSM.TURN):
-        romi.update(100,-100,120,0,110)
+        romi.update(100,-100,95,0,110)
     elif(FSM.WAIT):
         #stop
         romi.update(0,0,95,0,110)
@@ -95,8 +121,6 @@ while romi.simromi.step(timestep) != -1:
         print("state machine broken")
         romi.update(0,0,90,90,90)
     proxReading = romi.proxFrontVal
-
-    print(perfectDistanceSensor.getValue())
 
     #now write Romi's estimates to a file. to start, let's write our X,Y estimates
     f.write(str(simtime)+","+str(Xromi)+","+str(Yromi)+"\r\n")
