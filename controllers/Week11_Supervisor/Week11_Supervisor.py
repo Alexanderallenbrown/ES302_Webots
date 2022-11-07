@@ -30,10 +30,6 @@ good_map = False
 #load image representing map. We will resize.
 im = Image.open("map.png")
 im = ImageOps.grayscale(im)
-#determine whether map is square
-wid,hei = im.size
-if(wid==hei):
-    good_map = True
 #resize image to our map params
 im2 = im.resize((map_m,map_m))
 #convert image to true black and white
