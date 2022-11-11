@@ -65,7 +65,7 @@ map_d = 0.1 #10 cm grid size
 #initialize a variable to say whether the map is square (it must be)
 good_map = False
 #load image representing map. We will resize.
-im = Image.open("../Week11_Supervisor/map.png")
+im = Image.open("map.png")
 im = ImageOps.grayscale(im)
 #resize image to our map params
 im2 = im.resize((map_m,map_m))
@@ -77,6 +77,7 @@ map = np.array(im2)
 occupied_thresh = 200 #threshold for grayscale image to consider a pixel occupied
 w,h = map.shape
 #convert map to BINARY occupancy grid
+# NOTE! YOU MAY NEED TO MODIFY TO DILATE MAP!
 for i in range(0,map_m):
     for j in range(0,map_m):
         if map[i,j]>=occupied_thresh:
@@ -85,9 +86,9 @@ for i in range(0,map_m):
             map[i,j]=0
 
 #set start position for Romi
-start = np.array([[.1], [.1], [0]])
-#set a goal position for the Romi
-goal = np.array([[.3], [.3], [0]])
+start = np.array([[.2], [.2], [0]])
+#set a goal position for the Romi TODO: you may need to modify!
+goal = np.array([[1.8], [1.8], [0]])
 #now do path planning using dijkstras algorithm
 
 method = 0
