@@ -61,49 +61,6 @@ psidot = 0
 simtime = 0
 
 
-############### MAP STUFF ###################
-#set up the map properties
-map_m = 20 #20x20 map
-map_d = 0.1 #10 cm grid size
-
-#initialize a variable to say whether the map is square (it must be)
-good_map = False
-#load image representing map. We will resize.
-im = Image.open("map.png")
-im = ImageOps.grayscale(im)
-#resize image to our map params
-im2 = im.resize((map_m,map_m))
-#convert image to grayscale
-im2.convert("1")
-#load into a numpy array
-map = np.array(im2)
-#now loop through and place a crate at every occupied cell
-occupied_thresh = 200 #threshold for grayscale image to consider a pixel occupied
-w,h = map.shape
-#convert map to BINARY occupancy grid
-# NOTE! YOU MAY NEED TO MODIFY TO DILATE MAP!
-for i in range(0,map_m):
-    for j in range(0,map_m):
-        if map[i,j]>=occupied_thresh:
-            map[i,j]=1
-        else:
-            map[i,j]=0
-
-#set start position for Romi
-start = np.array([[.2], [.2], [0]])
-#set a goal position for the Romi TODO: you may need to modify!
-goal = np.array([[1.8], [1.8], [0]])
-#now do path planning using dijkstras algorithm
-
-method = 0
-
-if(method == 0):
-    # USAGE: dijkstras(occupancy_map, x_spacing, y_spacing, start, goal)
-    path = dijkstras(map,map_d,map_d,start,goal)
-else:
-    planner = PathPlanner(map,True)
-    init,path = planner.a_star(start,goal)
-
 # Main loop:
 # - perform simulation steps until Webots is stopping the controller
 while romi.simromi.step(timestep) != -1:
@@ -146,6 +103,23 @@ while romi.simromi.step(timestep) != -1:
         print("state machine broken")
         romi.update(0,0,90,90,90)
     proxReading = romi.proxFrontVal
+
+    # get camera image
+    cameraData = camera.getImage()
+    image = np.frombuffer(cameraData, np.uint8).reshape((camera.getHeight(), camera.getWidth(), 4))
+    # if image:
+    #     # display the components of each pixel
+    #     for x in range(0,camera.getWidth()):
+    #         for y in range(0,camera.getHeight()):
+    #             red   = image[x][y][0]
+    #             green = image[x][y][1]
+    #             blue  = image[x][y][2]
+    #             gray  = (red + green + blue) / 3
+    #             print('r='+str(red)+' g='+str(green)+' b='+str(blue))
+
+    #display camera Image
+    cv2.imshow("camera",image)
+    cv2.waitKey(1)
 
     #print(perfectDistanceSensor.getValue())
 
