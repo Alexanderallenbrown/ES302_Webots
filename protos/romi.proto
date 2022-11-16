@@ -154,6 +154,7 @@ Robot {
                       device [
                         DEF motor_s2::right LinearMotor {
                           name "s2::right"
+                          maxForce 1000
                         }
                         PositionSensor {
                           name "s2fb"
@@ -174,6 +175,7 @@ Robot {
                         name "gripper_jaw_1"
                         boundingObject DEF gripper_jaw_xform Transform {
                           translation 0.04 -0.0025 -0.015
+                          rotation 1 0 1 .15
                           children [
                             Box {
                               size 0.0253 0.005 0.023
@@ -189,6 +191,7 @@ Robot {
                       device [
                         DEF motor_s2::left LinearMotor {
                           name "s2::left"
+                          maxForce 1000
                         }
                       ]
                       endPoint Solid {
@@ -197,11 +200,12 @@ Robot {
                         children [
                           USE gripper_jaw_shape
                         ]
-                        boundingObject Transform {
+                        boundingObject DEF gripper_jaw_xform2 Transform {
                           translation 0.04 -0.0025 -0.015
+                          rotation 1 0 -1 -0.15
                           children [
                             Box {
-                              size 0.025 0.005 0.03
+                              size 0.0253 0.005 0.023
                             }
                           ]
                         }

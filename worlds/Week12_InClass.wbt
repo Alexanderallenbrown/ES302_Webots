@@ -204,11 +204,22 @@ WoodenBox {
   name "wooden box(33)"
   size 0.1 0.1 0.1
 }
-DEF PingPong Ball {
-  translation 1.75 1.75 0.01005
-  color 0 0.9 0
-  radius 0.01
-  centerOfMass [
-    0 0 0
+DEF PingPong Solid {
+  translation 1.75 1.75 0.0101
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+        roughness 1
+        metalness 0
+      }
+      geometry DEF ball_geom Sphere {
+        radius 0.0125
+      }
+    }
   ]
+  boundingObject USE ball_geom
+  physics Physics {
+    mass 0.001
+  }
 }
